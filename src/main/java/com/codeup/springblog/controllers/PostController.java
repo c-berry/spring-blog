@@ -1,34 +1,56 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/posts")
 public class PostController {
 
     @GetMapping
-    @ResponseBody
     public String index(){
-        return "This is the index page.";
+        return "/posts/index";
     }
 
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String viewPost(@PathVariable int id){
-        return "This is where you would view a single post... "+ id;
+    @GetMapping("/show")
+    public String viewPost(Model model){
+        Post post1 = new Post("First Post", "This is my first post.");
+        model.addAttribute("post1", post1);
+
+        return "posts/show";
     }
 
-    @GetMapping("/create")
-    @ResponseBody
-    public String createPostForm(){
-        return "This is where you would view the form to create a post... ";
+    @GetMapping("/wow")
+    public String test(){
+        return "posts/show";
     }
 
-    @PostMapping("/create")
-    @ResponseBody
-    public String createPost(){
-        return "This where the logic be when the form to create a post is submitted... ";
-    }
+//    @GetMapping("/shows")
+//    public String viewPosts(){
+//        Post post2 = new Post("Second Post", "This is my second post.");
+//        Post post3 = new Post("Third Post", "This is my third post.");
+//
+//        List<Post> posts = new ArrayList<>();
+//        posts.add(post2);
+//        posts.add(post3);
+//        model.addAttribute("posts", posts);
 
-} //EoC
+//        return "posts/show";
+//    }
+
+//    @GetMapping("/create")
+//    public String createPostForm(){
+//        return "This is where you would view the form to create a post... ";
+//    }
+//
+//    @PostMapping("/create")
+//    public String createPost(){
+//        return "This where the logic be when the form to create a post is submitted... ";
+//    }
+
+} // end

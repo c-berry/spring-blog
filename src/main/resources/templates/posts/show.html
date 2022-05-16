@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+<h1>View Post</h1>
+
+<h3 th:text="${post1.title}"></h3>
+<p th:text="${post1.body}"></p>
+
+<!--<h3 th:if="${posts}"></h3>-->
+<!--    <p>Here are the rest of posts:</p>-->
+<!--    <ul>-->
+<!--        <li th:each="post : ${posts}">-->
+<!--            <p>-->
+<!--                <span th:text="${post.title}"></span>-->
+<!--                <span th:text="${post.body}"></span>-->
+<!--            </p>-->
+<!--        </li>-->
+<!--    </ul>-->
+
+</body>
+</html>
