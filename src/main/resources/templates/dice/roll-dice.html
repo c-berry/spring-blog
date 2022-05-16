@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Roll Dice</title>
-</head>
+<head th:replace="partials/partials.html :: head ('Dice Game')">
 <body>
-<h1>Let's roll some dice! Guess a number between 1 - 6</h1>
+<h1 style="color: black">Let's roll some dice! Guess a number between 1 - 6 ...</h1>
 <ul>
     <li><a href="/roll-dice/1">Guess 1</a></li>
     <li><a href="/roll-dice/2">Guess 2</a></li>
@@ -16,9 +13,33 @@
     <li><a href="/roll-dice/6">Guess 6</a></li>
 </ul>
 
-<h3 th:if="${correct}">Correct!</h3>
+<!--<h3 th:if="${correct}">Correct!</h3>-->
+<!--<h3 th:if="${incorrect}">Wrong!!!</h3>-->
 
-<h3 th:if="${incorrect}">Wrong!!!</h3>
+<div th:if="${guess}">
 
+    <div style="display: flex">
+        <h3 style="display: flex; align-items: center; margin-right: 10px">You guessed:</h3>
+        <h1 style=" color: deepskyblue" th:text="${guess}"></h1>
+    </div>
+
+    <div style="display: flex">
+        <h3 style="display: flex; align-items: center; margin-right: 10px">Numbers rolled:</h3>
+        <span th:each="rolled : ${rolledNums}">
+                    <h1 style="color: blueviolet;padding-right: 18px" th:text="${rolled}"></h1>
+                </span>
+    </div>
+
+    <div th:if="${numbersHit == 0}"><h2 style="color: red"> Try again!</h2></div>
+
+    <div th:if="${numbersHit == 1 || numbersHit == 2}">
+        <h2>Nice! you hit <span style="color: limegreen; font-size: 36px" th:text="${numbersHit}"></span> dice.</h2>
+    </div>
+    <div th:if="${numbersHit == 3}">
+        <h2>Congratulations! you hit all<span style="color: green; font-size: 36px; margin-right: 6px; margin-left: 6px" th:text="${numbersHit}"></span> dice</h2>
+        <br>
+    </div>
+
+<footer th:replace="partials/partials.html :: footer"></footer>
 </body>
 </html>
