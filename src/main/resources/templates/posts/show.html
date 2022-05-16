@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show</title>
+<head th:replace="partials/partials.html :: head ('Show Posts')">
 </head>
+<ul th:replace="partials/partials.html :: navbar"></ul>
 <body>
-<h1>View Post</h1>
+<h1>View Post1</h1>
 
+<div th:if="${post1}">
 <h3 th:text="${post1.title}"></h3>
 <p th:text="${post1.body}"></p>
+</div>
 
-<!--<h3 th:if="${posts}"></h3>-->
-<!--    <p>Here are the rest of posts:</p>-->
-<!--    <ul>-->
-<!--        <li th:each="post : ${posts}">-->
-<!--            <p>-->
-<!--                <span th:text="${post.title}"></span>-->
-<!--                <span th:text="${post.body}"></span>-->
-<!--            </p>-->
-<!--        </li>-->
-<!--    </ul>-->
+<h3 ></h3>
+    <p th:if="${posts}">Here are the all of posts:</p>
+    <ul th:if="${posts}">
+        <li th:each="post : ${posts}">
+                <h3 th:text="${post.title}"></h3>
+                <span th:text="${post.body}"></span>
+        </li>
+    </ul>
 
+<footer th:replace="partials/partials.html :: footer"></footer>
 </body>
 </html>

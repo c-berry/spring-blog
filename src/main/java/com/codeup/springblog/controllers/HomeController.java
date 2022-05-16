@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class HomeController {
 
+//    @GetMapping
+//    @ResponseBody
+//    public String home(){
+//        return "This is the landing page!";
+//    }
+
     @GetMapping
-    @ResponseBody
-    public String home(){
-        return "This is the landing page!";
+    public String postsHome(){
+        return "/posts/index";
     }
 
 } //EoC

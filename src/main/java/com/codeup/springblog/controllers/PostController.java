@@ -19,29 +19,24 @@ public class PostController {
 
     @GetMapping("/show")
     public String viewPost(Model model){
-        Post post1 = new Post("First Post", "This is my first post.");
+        Post post1 = new Post("First Post", "This is my first post.", 1);
         model.addAttribute("post1", post1);
 
-        return "posts/show";
+        return "/posts/show";
     }
 
-    @GetMapping("/wow")
-    public String test(){
+    @GetMapping("/shows")
+    public String viewPosts(Model model){
+        Post post2 = new Post("Second Post", "This is my second post.", 2);
+        Post post3 = new Post("Third Post", "This is my third post.", 3);
+
+        List<Post> posts = new ArrayList<>();
+        posts.add(post2);
+        posts.add(post3);
+        model.addAttribute("posts", posts);
+
         return "posts/show";
     }
-
-//    @GetMapping("/shows")
-//    public String viewPosts(){
-//        Post post2 = new Post("Second Post", "This is my second post.");
-//        Post post3 = new Post("Third Post", "This is my third post.");
-//
-//        List<Post> posts = new ArrayList<>();
-//        posts.add(post2);
-//        posts.add(post3);
-//        model.addAttribute("posts", posts);
-
-//        return "posts/show";
-//    }
 
 //    @GetMapping("/create")
 //    public String createPostForm(){
