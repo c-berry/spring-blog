@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="partials/partials.html :: head ('Ads Search')">
+</head>
+<body>
+<h1>Search Ads</h1>
+
+<form action="/ads/search" method="POST">
+    <label for="findAd">Find an Ad by its Title:</label>
+    <input type="text" id="findAd" name="title">
+    <input type="submit" value="Search">
+</form>
+
+<div th:if="${results}">
+    <ul>
+        <li th:each="result : ${results}">
+            <h2 th:text="${result.title}"></h2>
+            <p th:text="${result.description}"></p>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

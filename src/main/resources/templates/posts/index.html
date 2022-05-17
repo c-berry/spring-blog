@@ -4,7 +4,17 @@
 <body>
 <ul th:replace="partials/partials.html :: navbar"></ul>
 
-<h1 style="text-align: center">Home Page (Posts)</h1>
+<h1 style="text-align: center">All the Posts)</h1>
+
+<div th:if="${posts}">
+    <ul>
+        <li th:each="post : ${posts}">
+            <span th:text="${post.title}"></span>
+            <span th:text="${post.body}"></span>
+        </li>
+    </ul>
+</div>
+
 
 <footer th:replace="partials/partials.html :: footer"></footer>
 </body>
