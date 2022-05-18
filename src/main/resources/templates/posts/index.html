@@ -21,6 +21,7 @@
     <div th:each="post : ${posts}">
         <h3 th:text="${post.title}" class="card-header" style="margin-left: 5px"></h3>
         <p th:text="${post.body}" class="card-body"></p>
+        <p th:text="${post.postDetails.historyOfPost}" class="card-body"></p>
     </div>
 </div>
 

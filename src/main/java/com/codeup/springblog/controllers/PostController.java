@@ -1,8 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.PostDetails;
+import com.codeup.springblog.repositories.PostDetailsRepository;
 import com.codeup.springblog.repositories.PostRepository;
-import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,12 @@ import java.util.List;
 public class PostController {
 
     private final PostRepository postDao;
-    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
+    private final PostDetailsRepository postDetailsDao;
+
+    public PostController(PostRepository postDao, PostDetailsRepository postDetailsDao){
         this.postDao = postDao;
-        this.userDao = userDao;
+        this.postDetailsDao = postDetailsDao;
     }
 
     @GetMapping
@@ -36,7 +38,9 @@ public class PostController {
     @GetMapping("/index")
     public String viewAllPosts(Model model){
         List<Post> post = postDao.findAll();
+        List<PostDetails> pd = postDetailsDao.findAll();
         model.addAttribute("posts", post);
+        model.addAttribute("details", pd);
 
         return "posts/index";
     }
