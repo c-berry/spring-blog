@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html  xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="partials/partials.html :: head ('Home')">
+<head th:replace="partials/partials.html :: head ('View All Posts')">
 <body>
-<ul th:replace="partials/partials.html :: navbar"></ul>
+<nav th:replace="partials/partials.html :: navbar"></nav>
 
-<h1 style="text-align: center">All the Posts)</h1>
+<h1 th:if="${posts}">All the Posts</h1>
+<h1 th:if="!${posts}">Landing Page</h1>
 
-<div th:if="${posts}">
-    <ul>
-        <li th:each="post : ${posts}">
-            <span th:text="${post.title}"></span>
-            <span th:text="${post.body}"></span>
-        </li>
-    </ul>
+<!--<div th:if="${posts}" class="card">-->
+<!--    <ul>-->
+<!--        <li th:each="post : ${posts}" class="card-body">-->
+<!--            <span th:text="${post.title}" class=""></span>-->
+<!--            <span th:text="${post.body}" class=""></span>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+
+<div th:if="${posts}" class="card" style="margin-left: 10px">
+    <div th:each="post : ${posts}">
+        <h3 th:text="${post.title}" class="card-header" style="margin-left: 5px"></h3>
+        <p th:text="${post.body}" class="card-body"></p>
+    </div>
 </div>
 
 

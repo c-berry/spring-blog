@@ -13,8 +13,11 @@ public class Post {
     @Column(nullable = false, length = 50)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
+
+    @OneToOne
+    private User owner;
 
     public Post(){}
 

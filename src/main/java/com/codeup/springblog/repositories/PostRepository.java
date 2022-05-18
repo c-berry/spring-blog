@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-//    Post getById(long id);
+    Post getById(long id);
 
 //    List<Post> findByTitle(String title);
 

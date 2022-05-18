@@ -2,11 +2,11 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -14,9 +14,11 @@ import java.util.List;
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao){
+    public PostController(PostRepository postDao, UserRepository userDao){
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping
@@ -26,14 +28,13 @@ public class PostController {
 
     @GetMapping("/{id}")
     public String viewPost(@PathVariable long id, Model model){
-
         model.addAttribute("results", postDao.getById(id));
 
         return "/posts/show";
     }
 
     @GetMapping("/index")
-    public String viewPosts(Model model){
+    public String viewAllPosts(Model model){
         List<Post> post = postDao.findAll();
         model.addAttribute("posts", post);
 

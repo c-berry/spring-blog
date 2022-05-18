@@ -9,25 +9,52 @@
 </head>
 <body>
 
-<ul th:fragment="navbar" class="">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-</ul>
+<!--NAVBAR-->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/posts/">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/posts/index">View All</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/posts/create">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/posts/1">View Post</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--NAVBAR-->
 
+<!--HEADER-->
 <div th:fragment="header">
     <h1>I am a partial</h1>
 </div>
+<!--HEADER-->
 
+<!--FOOTER-->
 <footer th:fragment="footer" class="text-center text-lg-start bg-light text-muted mb-0 ">
 <!--    <section>-->
 <!--        <div class="me-5 d-flex justify-content-center">-->
@@ -79,7 +106,7 @@
                         <i class="fas fa-gem me-3"></i>Lorem Ipsum
                     </h6>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consequatur, consequuntur cum distinctio, eius enim est et iste magni mollitia nam nihil nobis porro quod reiciendis sequi similique sunt voluptates?
+                        “He who would learn to fly one day must first learn to walk and run and climb and dance; one cannot fly into flying.”
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -91,20 +118,20 @@
                         Useful links
                     </h6>
                     <p>
-                        <i class="fa-solid fa-location-dot"></i>
-                        <a href="https://www.google.com/maps" class="text-reset">Maps</a>
+                        <i class="fa-solid fa-leaf"></i>
+                        <a href="https://docs.spring.io/spring-data/jpa/docs/current/reference/html/" class="text-reset">Spring JPA</a>
                     </p>
                     <p>
-                        <i class="fa-solid fa-utensils"></i>
-                        <a href="https://www.yelp.com/search?find_loc=San+Antonio%2C+TX" class="text-reset">Yelp Reviews</a>
+                        <i class="fa-brands fa-bootstrap"></i>
+                        <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/" class="text-reset">Bootstrap</a>
                     </p>
                     <p>
-                        <i class="fa-solid fa-bed"></i>
-                        <a href="https://www.booking.com/city/us/san-antonio.en.html?aid=336408;label=san-antonio-yc01*o3xhXZ6CTsh9POUJgS553260295140:pl:ta:p1300:p2:ac:ap:neg:fi:tikwd-35026980:lp9060401:li:dec:dm:ppccp=UmFuZG9tSVYkc2RlIyh9YavywThF4buZQ9k1iY7Jbs4;ws=&gclid=CjwKCAjwve2TBhByEiwAaktM1NH-pUHdINdGIDA7BbHqryKJHm5Jnxzo7gjFOBSbTj1CPgOdIgRs2RoCd5QQAvD_BwE" class="text-reset">Hotel Rooms</a>
+                        <i class="fa-solid fa-code"></i>
+                        <a href="https://java.codeup.com/" class="text-reset">Codeup</a>
                     </p>
                     <p>
-                        <i class="fa-solid fa-car-side"></i>
-                        <a href="https://www.uber.com/global/en/cities/san-antonio/" class="text-reset">Get a Ride</a>
+                        <i class="fa-brands fa-stack-overflow"></i>
+                        <a href="https://stackoverflow.com/" class="text-reset">Stack Overflow</a>
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -132,7 +159,11 @@
         <a class="text-reset fw-bold" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Info</a>
     </div>
     <!-- Copyright -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </footer>
-<script th:fragment="bootstrap-js" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<!--FOOTER-->
+
+<!--<script th:fragment="bootstrap-js" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>-->
 </body>
 </html>
