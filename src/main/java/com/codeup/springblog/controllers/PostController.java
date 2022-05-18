@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -48,7 +49,8 @@ public class PostController {
 
     @PostMapping("/create")
     public String addPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body){
-        Post post = new Post(title, body);
+        User user = userDao.getById(1L);
+        Post post = new Post(title, body, user);
         postDao.save(post);
 
         return "redirect:/posts/index";

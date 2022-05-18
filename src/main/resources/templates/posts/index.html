@@ -20,7 +20,11 @@
 <div th:if="${posts}" class="card" style="margin-left: 10px">
     <div th:each="post : ${posts}">
         <h3 th:text="${post.title}" class="card-header" style="margin-left: 5px"></h3>
-        <p th:text="${post.body}" class="card-body"></p>
+        <div class="card-body">
+            <p th:text="${post.body}"></p>
+            <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
+<!--            <p th:text="'Email: ' + ${post.getUser().getEmail()}"></p>-->
+        </div>
     </div>
 </div>
 
