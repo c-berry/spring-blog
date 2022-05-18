@@ -23,7 +23,15 @@
         <div class="card-body">
             <p th:text="${post.body}"></p>
             <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
-<!--            <p th:text="'Email: ' + ${post.getUser().getEmail()}"></p>-->
+
+<!--            <div th:if="${post.getId() == }">-->
+<!--                <div th:each="image : ${images.}">-->
+<!--                    <img th:src="${image.getUrl()}">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div th:each="image : ${post.postImages}">
+                <img th:src="${image.getUrl()}">
+            </div>
         </div>
     </div>
 </div>

@@ -23,4 +23,11 @@ VALUES ('chris@email.com', 'password', 'crispy'),
 INSERT INTO posts(title, body, user_id)
 VALUES ('Test', 'This is just a test.', 1),
        ('Another Test', 'Yet another test.', 2),
-       ('Third Test', 'You know the drill.', 3);
+       ('Third Test', 'You know the drill.', 3),
+       ('Animals', 'Behold my cuddly critters!', 1);
+
+INSERT INTO post_images(title, url, post_id)
+VALUES ('Cat', 'https://media.wired.co.uk/photos/60c8730fa81eb7f50b44037e/3:2/w_3329,h_2219,c_limit/1521-WIRED-Cat.jpeg', 4),
+       ('Dog', 'https://cdn.decrypt.co/resize/1024/height/512/wp-content/uploads/2021/07/baby-doge-dogecoin-shiba-inu-gID_4.jpg', 4),
+       ('Bird', 'https://nas-national-prod.s3.amazonaws.com/aud_gbbc-2016_dark-eyed-junco_34384_kk_oh_photo-michele-black.jpg', 4);
+

@@ -1,7 +1,9 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.PostImages;
 import com.codeup.springblog.models.User;
+import com.codeup.springblog.repositories.PostImagesRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -10,16 +12,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// (BONUS). Add a form to add additional images to the cat blog post.
+
 @Controller
 @RequestMapping("/posts")
 public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
+    private final PostImagesRepository postImagesDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao){
+    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao){
         this.postDao = postDao;
         this.userDao = userDao;
+        this.postImagesDao = postImagesDao;
     }
 
     @GetMapping
@@ -37,7 +43,9 @@ public class PostController {
     @GetMapping("/index")
     public String viewAllPosts(Model model){
         List<Post> post = postDao.findAll();
+        List<PostImages> postImages = postImagesDao.findAll();
         model.addAttribute("posts", post);
+        model.addAttribute("images", postImages);
 
         return "posts/index";
     }
