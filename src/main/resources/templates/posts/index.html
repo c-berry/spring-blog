@@ -7,31 +7,33 @@
 <h1 th:if="${posts}">All the Posts</h1>
 <h1 th:if="!${posts}">Landing Page</h1>
 
-<!--<div th:if="${posts}" class="card">-->
-<!--    <ul>-->
-<!--        <li th:each="post : ${posts}" class="card-body">-->
-<!--            <span th:text="${post.title}" class=""></span>-->
-<!--            <span th:text="${post.body}" class=""></span>-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--</div>-->
+<div th:if="${posts}" class="card" style="">
 
-
-<div th:if="${posts}" class="card" style="margin-left: 10px">
     <div th:each="post : ${posts}">
-        <h3 th:text="${post.title}" class="card-header" style="margin-left: 5px"></h3>
+        <h3 th:text="${post.title}" class="card-header ch" style="margin-left: 5px"></h3>
+
+
         <div class="card-body">
             <p th:text="${post.body}"></p>
-            <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
+            <div class="flex-container d-flex flex-wrap">
+                <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
 
-<!--            <div th:if="${post.getId() == }">-->
-<!--                <div th:each="image : ${images.}">-->
-<!--                    <img th:src="${image.getUrl()}">-->
-<!--                </div>-->
-<!--            </div>-->
-            <div th:each="image : ${post.postImages}">
-                <img th:src="${image.getUrl()}">
+                <div class="flex-container d-flex flex-row">
+                    <button name="edit" th:data-id="${post.getId()}" class="btn btn-primary edit btn2">Edit</button>
+
+                    <form action="/posts/delete-post" method="POST">
+                        <input type="hidden" th:value="${post.getId()}" name="id">
+                        <button type="submit" class="btn btn-danger btn1">Delete</button>
+                    </form>
+                </div>
             </div>
+
+            <div class="flex-container d-flex flex-wrap">
+                <div th:each="image : ${post.postImages}" >
+                    <img th:src="${image.getUrl()}">
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

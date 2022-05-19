@@ -6,28 +6,42 @@
 
 <h1>View a Post</h1>
 
-<!--<div th:if="${post1}">-->
-<!--<h3 th:text="${post1.title}"></h3>-->
-<!--<p th:text="${post1.body}"></p>-->
-<!--</div>-->
-
-<!--<h3 ></h3>-->
-<!--    <p th:if="${posts}">Here are the all of posts:</p>-->
-<!--    <ul th:if="${posts}">-->
-<!--        <li th:each="post : ${posts}">-->
-<!--                <h3 th:text="${post.title}"></h3>-->
-<!--                <span th:text="${post.body}"></span>-->
-<!--        </li>-->
-<!--    </ul>-->
-
-
 <div th:if="${results}">
     <ul>
         <li th:text="${results.title}"></li>
         <li th:text="${results.body}"></li>
         <li th:text="${results.getUser().getEmail()}"></li>
+        <div class="flex-container d-flex flex-wrap">
+            <div th:each="image : ${results.postImages}" >
+                <img th:src="${image.getUrl()}" class="">
+            </div>
+        </div>
     </ul>
 </div>
+
+<fieldset>
+    <legend>Edit Post</legend>
+    <form action="/posts/edit-post" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
+        <label for="body">Body</label>
+        <input type="text" id="body" name="body">
+        <input type="hidden" th:value="${results.getId()}" name="id">
+        <input type="submit" value="Submit">
+    </form>
+</fieldset>
+
+<fieldset>
+    <legend>Add Image to Post</legend>
+    <form action="/posts/add-image" method="POST">
+        <label for="img-title">Image Title:</label>
+        <input type="text" id="img-title" name="img-title">
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url">
+        <input type="hidden" th:value="${results.getId()}" name="id">
+        <input type="submit" value="Submit">
+    </form>
+</fieldset>
 
 <footer th:replace="partials/partials.html :: footer">
 </footer>

@@ -32,6 +32,12 @@ public class PostImages {
         this.url = url;
     }
 
+    public PostImages(String title, String url, Post post) {
+        this.title = title;
+        this.url = url;
+        this.post = post;
+    }
+
     public long getId() {
         return id;
     }

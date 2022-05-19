@@ -26,10 +26,23 @@ public class Post {
 
     public Post(){}
 
+    public Post(String title, String body, User user, List<PostImages> postImages) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
+        this.postImages = postImages;
+    }
+
     public Post(String title, String body, long id) {
         this.title = title;
         this.body = body;
         this.id = id;
+    }
+
+    public Post(long id, String title, String body) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
     }
 
     public Post(String title, String body) {

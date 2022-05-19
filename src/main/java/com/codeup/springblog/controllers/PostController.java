@@ -64,4 +64,39 @@ public class PostController {
         return "redirect:/posts/index";
     }
 
+    @PostMapping("/edit-post")
+    public String editPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="id") long id) {
+
+        Post post = postDao.getById(id);
+        post.setTitle(title);
+        post.setBody(body);
+        postDao.save(post);
+
+        return "redirect:/posts/" + id;
+    }
+
+    @PostMapping("/add-image")
+    public String addImage(@RequestParam(name="img-title")String title, @RequestParam(name="url")String url, @RequestParam(name="id") long id){
+
+        Post post = postDao.getById(id);
+        PostImages postImage = new PostImages(title, url, post);
+
+        List<PostImages> images = post.getPostImages();
+        images.add(postImage);
+        post.setPostImages(images);
+        postDao.save(post);
+
+        return "redirect:/posts/" + id;
+    }
+
+    @PostMapping("/delete-post")
+    public String deletePost(@RequestParam(name="id") long id){
+
+        Post post = postDao.getById(id);
+
+        postDao.delete(post);
+
+        return "redirect:/posts/index";
+    }
+
 } // end
