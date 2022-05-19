@@ -6,11 +6,16 @@
 
 <h1>View a Post</h1>
 
-<div th:if="${results}">
-    <ul>
-        <li th:text="${results.title}"></li>
-        <li th:text="${results.body}"></li>
-        <li th:text="${results.getUser().getEmail()}"></li>
+<div th:if="${results}" class="card">
+    <div class="card-body">
+        <p th:text="${results.title}"></p>
+        <p th:text="${results.body}"></p>
+        <p th:text="${results.getUser().getEmail()}"></p>
+        <div>
+            <div th:each="tag : ${results.getTags()}">
+                <p th:text="' &#8227; ' + ${tag.getName()}"></p>
+            </div>
+        </div>
         <div class="flex-container d-flex flex-wrap">
             <div th:each="image : ${results.postImages}" >
                 <img th:src="${image.getUrl()}" class="">
@@ -20,19 +25,19 @@
                 </form>
             </div>
         </div>
-    </ul>
+    </div>
 </div>
 
 <fieldset>
     <legend>Edit Post</legend>
     <form action="/posts/edit-post" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" th:value="${results.title}" >
-        <label for="body">Body</label>
-        <input type="text" id="body" name="body" th:value="${results.body}">
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" id="title" name="title" th:value="${results.title}" class="form-control">
+        <label for="body" class="form-label">Body</label>
+        <input type="text" id="body" name="body" th:value="${results.body}" class="form-control">
 
-        <label for="tag">Change Tag(s):</label>
-        <select name="tag" id="tag" multiple>
+        <label for="tag" class="form-label">Change Tag(s):</label>
+        <select name="tag" id="tag" class="form-control" multiple>
             <option value="1">Tech</option>
             <option value="2">Games</option>
             <option value="3">Lifestyle</option>
@@ -42,19 +47,19 @@
         </select>
 
         <input type="hidden" th:value="${results.id}" name="id">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn-primary">
     </form>
 </fieldset>
 
 <fieldset>
     <legend>Add Image to Post</legend>
     <form action="/posts/add-image" method="POST">
-        <label for="img-title">Image Title:</label>
-        <input type="text" id="img-title" name="img-title">
-        <label for="url">URL:</label>
-        <input type="text" id="url" name="url">
+        <label for="img-title" class="form-label">Image Title:</label>
+        <input type="text" id="img-title" name="img-title" class="form-control">
+        <label for="url" class="form-label">URL:</label>
+        <input type="text" id="url" name="url" class="form-control">
         <input type="hidden" th:value="${results.getId()}" name="id">
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn-primary">
     </form>
 </fieldset>
 

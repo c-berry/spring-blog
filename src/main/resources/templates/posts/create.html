@@ -10,12 +10,12 @@
 <fieldset>
     <legend>Create</legend>
     <form action="/posts/create" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title">
-        <label for="body">Body:</label>
-        <input type="text" id="body" name="body">
-        <label for="tag">Select Tag(s):</label>
-        <select name="tag" id="tag" multiple>
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" id="title" name="title" class="form-control">
+        <label for="body" class="form-label">Body:</label>
+        <input type="text" id="body" name="body" class="form-control">
+        <label for="tag" class="form-label">Select Tag(s):</label>
+        <select name="tag" id="tag" class="form-control" multiple>
             <option value="1">Tech</option>
             <option value="2">Games</option>
             <option value="3">Lifestyle</option>
@@ -23,7 +23,7 @@
             <option value="5">Music</option>
             <option value="6">Pets</option>
         </select>
-        <input type="submit" value="submit">
+        <input type="submit" value="Submit" class="btn-primary btn1">
     </form>
 </fieldset>
 

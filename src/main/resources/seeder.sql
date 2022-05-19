@@ -1,4 +1,4 @@
-# CREATE DATABASE IF NOT EXISTS spring_blog_db;
+CREATE DATABASE IF NOT EXISTS spring_blog_db;
 
 USE spring_blog_db;
 
