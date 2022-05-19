@@ -14,6 +14,10 @@
         <div class="flex-container d-flex flex-wrap">
             <div th:each="image : ${results.postImages}" >
                 <img th:src="${image.getUrl()}" class="">
+                <form action="/posts/delete-img" method="POST">
+                    <input type="hidden" th:value="${image.getId()}" name="id">
+                    <button type="submit" class="btn btn-danger btn1">Delete</button>
+                </form>
             </div>
         </div>
     </ul>
@@ -23,10 +27,21 @@
     <legend>Edit Post</legend>
     <form action="/posts/edit-post" method="POST">
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title">
+        <input type="text" id="title" name="title" th:value="${results.title}" >
         <label for="body">Body</label>
-        <input type="text" id="body" name="body">
-        <input type="hidden" th:value="${results.getId()}" name="id">
+        <input type="text" id="body" name="body" th:value="${results.body}">
+
+        <label for="tag">Change Tag(s):</label>
+        <select name="tag" id="tag" multiple>
+            <option value="1">Tech</option>
+            <option value="2">Games</option>
+            <option value="3">Lifestyle</option>
+            <option value="4">Etc.</option>
+            <option value="5">Music</option>
+            <option value="6">Pets</option>
+        </select>
+
+        <input type="hidden" th:value="${results.id}" name="id">
         <input type="submit" value="Submit">
     </form>
 </fieldset>

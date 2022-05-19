@@ -12,19 +12,24 @@
     <div th:each="post : ${posts}">
         <h3 th:text="${post.title}" class="card-header ch" style="margin-left: 5px"></h3>
 
-
         <div class="card-body">
             <p th:text="${post.body}"></p>
+
             <div class="flex-container d-flex flex-wrap">
                 <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
 
                 <div class="flex-container d-flex flex-row">
                     <button name="edit" th:data-id="${post.getId()}" class="btn btn-primary edit btn2">Edit</button>
-
                     <form action="/posts/delete-post" method="POST">
                         <input type="hidden" th:value="${post.getId()}" name="id">
                         <button type="submit" class="btn btn-danger btn1">Delete</button>
                     </form>
+                </div>
+            </div>
+
+            <div>
+                <div th:each="tag : ${post.getTags()}">
+                    <p th:text="' &#8227; ' + ${tag.getName()}"></p>
                 </div>
             </div>
 
@@ -33,11 +38,9 @@
                     <img th:src="${image.getUrl()}">
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-
 
 <footer th:replace="partials/partials.html :: footer"></footer>
 </body>

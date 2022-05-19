@@ -24,6 +24,14 @@ public class Post {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostImages> postImages;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name="post_tag",
+            joinColumns={@JoinColumn(name="post_id")},
+            inverseJoinColumns={@JoinColumn(name="tag_id")}
+    )
+    private List<Tag> tags;
+
     public Post(){}
 
     public Post(String title, String body, User user, List<PostImages> postImages) {
@@ -54,6 +62,13 @@ public class Post {
         this.title = title;
         this.body = body;
         this.user = user;
+    }
+
+    public Post(List<Tag> tags, String title, String body, User user) {
+        this.title = title;
+        this.body = body;
+        this.user = user;
+        this.tags = tags;
     }
 
     public String getTitle() {
@@ -90,5 +105,13 @@ public class Post {
 
     public void setPostImages(List<PostImages> postImages) {
         this.postImages = postImages;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

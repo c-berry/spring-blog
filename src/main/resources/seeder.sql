@@ -1,3 +1,5 @@
+# CREATE DATABASE IF NOT EXISTS spring_blog_db;
+
 USE spring_blog_db;
 
 # INSERT INTO  pet_details(description, is_sterile, weight_in_ounces)
@@ -40,3 +42,20 @@ VALUES ('Cat', 'https://media.wired.co.uk/photos/60c8730fa81eb7f50b44037e/3:2/w_
        ('Jim Morrison', 'https://bonjourparis.com/wp-content/uploads/2020/07/31591828846_b36df16120_b-e1551797088469-670x679-1.jpg', 1),
        ('Tyler the Creator', 'https://www.nme.com/wp-content/uploads/2022/03/Tyler-The-Creator.jpg', 1);
 
+INSERT INTO tags(name)
+VALUES ('Tech'),
+       ('Games'),
+       ('Lifestyle'),
+       ('Etc.'),
+       ('Music'),
+       ('Pets');
+
+INSERT INTO post_tag(post_id, tag_id)
+VALUES (1, 5),
+       (1, 4),
+       (2, 3),
+       (2, 4),
+       (3, 1),
+       (3, 2),
+       (4, 6),
+       (4, 4);

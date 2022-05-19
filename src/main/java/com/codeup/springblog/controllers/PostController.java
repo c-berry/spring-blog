@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.PostImages;
+import com.codeup.springblog.models.Tag;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostImagesRepository;
 import com.codeup.springblog.repositories.PostRepository;
@@ -35,6 +36,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public String viewPost(@PathVariable long id, Model model){
+
         model.addAttribute("results", postDao.getById(id));
 
         return "/posts/show";
@@ -42,8 +44,10 @@ public class PostController {
 
     @GetMapping("/index")
     public String viewAllPosts(Model model){
+
         List<Post> post = postDao.findAll();
         List<PostImages> postImages = postImagesDao.findAll();
+
         model.addAttribute("posts", post);
         model.addAttribute("images", postImages);
 
@@ -56,20 +60,22 @@ public class PostController {
     }
 
     @PostMapping("/create")
-    public String addPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body){
+    public String addPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="tag")List<Tag> tags){
+
         User user = userDao.getById(1L);
-        Post post = new Post(title, body, user);
+        Post post = new Post(tags, title, body, user);
         postDao.save(post);
 
         return "redirect:/posts/index";
     }
 
     @PostMapping("/edit-post")
-    public String editPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="id") long id) {
+    public String editPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="id") long id, @RequestParam(name="tag") List<Tag> tags) {
 
         Post post = postDao.getById(id);
         post.setTitle(title);
         post.setBody(body);
+        post.setTags(tags);
         postDao.save(post);
 
         return "redirect:/posts/" + id;
@@ -93,8 +99,16 @@ public class PostController {
     public String deletePost(@RequestParam(name="id") long id){
 
         Post post = postDao.getById(id);
-
         postDao.delete(post);
+
+        return "redirect:/posts/index";
+    }
+
+    @PostMapping("/delete-img")
+    public String deleteImage(@RequestParam(name="id") long id){
+
+        PostImages image = postImagesDao.getById(id);
+        postImagesDao.delete(image);
 
         return "redirect:/posts/index";
     }
