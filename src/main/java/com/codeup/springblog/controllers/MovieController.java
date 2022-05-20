@@ -32,7 +32,7 @@ public class MovieController {
     // Create
     @GetMapping("/create")
     public String createMovie(Model model) {
-        // TODO: Complete this
+
         model.addAttribute("movie", new Movie());
         return "movies/create";
     }
@@ -42,7 +42,6 @@ public class MovieController {
     public String doCreateMovie(
             @ModelAttribute Movie movie
     ) {
-        // TODO: Complete this
 
         movieDao.save(movie);
         return "movies/index";
@@ -57,7 +56,6 @@ public class MovieController {
 
         model.addAttribute("movie", movieDao.getById(id));
 
-        // TODO: Populate a form like the Create form, such that
         // it will allow you to update an existing movie.
         return "movies/create";
     }

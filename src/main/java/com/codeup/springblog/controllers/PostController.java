@@ -1,9 +1,6 @@
 package com.codeup.springblog.controllers;
 
-import com.codeup.springblog.models.Post;
-import com.codeup.springblog.models.PostImages;
-import com.codeup.springblog.models.Tag;
-import com.codeup.springblog.models.User;
+import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.PostImagesRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
@@ -54,31 +51,64 @@ public class PostController {
         return "posts/index";
     }
 
+//    @GetMapping("/create")
+//    public String createPostForm(){
+//        return "posts/create";
+//    }
+//
+//    @PostMapping("/create")
+//    public String addPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="tag")List<Tag> tags){
+//
+//        User user = userDao.getById(1L);
+//        Post post = new Post(tags, title, body, user);
+//        postDao.save(post);
+//
+//        return "redirect:/posts/index";
+//    }
+
+//    form-model binding refactor
     @GetMapping("/create")
-    public String createPostForm(){
+    public String createPostForm(Model model){
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
 
     @PostMapping("/create")
-    public String addPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="tag")List<Tag> tags){
-
+    public String addPost(@ModelAttribute Post post){
         User user = userDao.getById(1L);
-        Post post = new Post(tags, title, body, user);
+        post.setUser(user);
         postDao.save(post);
-
         return "redirect:/posts/index";
     }
 
-    @PostMapping("/edit-post")
-    public String editPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="id") long id, @RequestParam(name="tag") List<Tag> tags) {
 
-        Post post = postDao.getById(id);
-        post.setTitle(title);
-        post.setBody(body);
-        post.setTags(tags);
+//    @PostMapping("/edit-post")
+//    public String editPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="id") long id, @RequestParam(name="tag") List<Tag> tags) {
+//
+//        Post post = postDao.getById(id);
+//        post.setTitle(title);
+//        post.setBody(body);
+//        post.setTags(tags);
+//        postDao.save(post);
+//
+//        return "redirect:/posts/" + id;
+//    }
+//
+    // Update
+    @GetMapping("/posts/{id}")
+    public String updatePost(@PathVariable long id, Model model) {
+
+        model.addAttribute("post", postDao.getById(id));
+
+        return "/posts/show";
+    }
+
+    @PostMapping("/edit-post")
+    public String doUpdatePost(@ModelAttribute Post post) {
+
         postDao.save(post);
 
-        return "redirect:/posts/" + id;
+        return "redirect:/posts/" + post.getId();
     }
 
     @PostMapping("/add-image")
