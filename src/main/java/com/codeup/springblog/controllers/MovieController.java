@@ -76,9 +76,6 @@ public class MovieController {
     public String deleteMovie(
             @RequestParam(name="id") long id
     ) {
-        // TODO: Add button to the movies index page that will delete the items
-        // TODO: button should be in a form, value will be the id of the item.
-        // TODO: Send the user back to to the main page.
 
         movieDao.deleteById(id);
 

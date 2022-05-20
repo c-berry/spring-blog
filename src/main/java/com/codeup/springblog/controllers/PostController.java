@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// (BONUS). Add a form to add additional images to the cat blog post.
-
 @Controller
 @RequestMapping("/posts")
 public class PostController {
@@ -69,18 +67,21 @@ public class PostController {
 //    form-model binding refactor
     @GetMapping("/create")
     public String createPostForm(Model model){
+
         model.addAttribute("post", new Post());
+
         return "posts/create";
     }
 
     @PostMapping("/create")
     public String addPost(@ModelAttribute Post post){
+
         User user = userDao.getById(1L);
         post.setUser(user);
         postDao.save(post);
+
         return "redirect:/posts/index";
     }
-
 
 //    @PostMapping("/edit-post")
 //    public String editPost(@RequestParam(name="title")String title, @RequestParam(name="body") String body, @RequestParam(name="id") long id, @RequestParam(name="tag") List<Tag> tags) {
@@ -94,7 +95,8 @@ public class PostController {
 //        return "redirect:/posts/" + id;
 //    }
 //
-    // Update
+
+    //    form-model binding refactor
     @GetMapping("/posts/{id}")
     public String updatePost(@PathVariable long id, Model model) {
 
@@ -106,9 +108,11 @@ public class PostController {
     @PostMapping("/edit-post")
     public String doUpdatePost(@ModelAttribute Post post) {
 
+        User user = userDao.getById(1L);
+        post.setUser(user);
         postDao.save(post);
 
-        return "redirect:/posts/" + post.getId();
+        return "redirect:/posts/index";
     }
 
     @PostMapping("/add-image")
@@ -125,11 +129,20 @@ public class PostController {
         return "redirect:/posts/" + id;
     }
 
-    @PostMapping("/delete-post")
-    public String deletePost(@RequestParam(name="id") long id){
+//    @PostMapping("/delete-post")
+//    public String deletePost(@RequestParam(name="id") long id){
+//
+//        Post post = postDao.getById(id);
+//        postDao.delete(post);
+//
+//        return "redirect:/posts/index";
+//    }
 
-        Post post = postDao.getById(id);
-        postDao.delete(post);
+    //    form-model binding refactor
+    @PostMapping("/delete-post")
+    public String deleteMovie(@RequestParam(name="id") long id) {
+
+        postDao.deleteById(id);
 
         return "redirect:/posts/index";
     }
