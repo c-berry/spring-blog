@@ -7,7 +7,7 @@
 <h1 th:if="${posts}">All the Posts</h1>
 <h1 th:if="!${posts}">Landing Page</h1>
 
-<div th:if="${posts}" class="card" style="">
+<div th:if="${posts}" class="card">
 
     <div th:each="post : ${posts}">
         <h3 th:text="${post.title}" class="card-header ch" style="margin-left: 5px"></h3>

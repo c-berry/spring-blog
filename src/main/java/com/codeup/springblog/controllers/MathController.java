@@ -42,4 +42,16 @@ public class MathController {
         return num1 + " ÷ " + num2 + " = " + (num1 / num2);
     }
 
+    @GetMapping("/math")
+    public String math(){
+        return "/math/index";
+    }
+
+    @PostMapping("/math")
+    public String doMath(){
+
+
+        return "/math/index";
+    }
+
 } //EoC
