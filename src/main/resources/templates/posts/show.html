@@ -6,18 +6,18 @@
 
 <h1>View a Post</h1>
 
-<div th:if="${results}" class="card">
+<div th:if="${post}" class="card">
     <div class="card-body">
-        <p th:text="${results.title}"></p>
-        <p th:text="${results.body}"></p>
-        <p th:text="${results.getUser().getEmail()}"></p>
+        <p th:text="${post.title}"></p>
+        <p th:text="${post.body}"></p>
+        <p th:text="${post.getUser().getEmail()}"></p>
         <div>
-            <div th:each="tag : ${results.getTags()}">
+            <div th:each="tag : ${post.getTags()}">
                 <p th:text="' &#8227; ' + ${tag.getName()}"></p>
             </div>
         </div>
         <div class="flex-container d-flex flex-wrap">
-            <div th:each="image : ${results.postImages}" >
+            <div th:each="image : ${post.postImages}" >
                 <img th:src="${image.getUrl()}" class="">
                 <form action="/posts/delete-img" method="POST">
                     <input type="hidden" th:value="${image.getId()}" name="id">
@@ -30,11 +30,11 @@
 
 <fieldset>
     <legend>Edit Post</legend>
-    <form action="/posts/edit-post" method="POST" id="formId" th:data-id="${results.id}">
+    <form action="/posts/edit-post" method="POST" id="formId" th:data-id="${post.id}">
         <label for="title" class="form-label">Title:</label>
-        <input type="text" id="title" name="title" th:value="${results.title}" class="form-control">
+        <input type="text" id="title" name="title" th:value="${post.title}" class="form-control">
         <label for="body" class="form-label">Body</label>
-        <input type="text" id="body" name="body" th:value="${results.body}" class="form-control">
+        <input type="text" id="body" name="body" th:value="${post.body}" class="form-control">
 
         <label for="tag" class="form-label">Change Tag(s):</label>
         <select name="tag" id="tag" class="form-control" multiple>
@@ -46,7 +46,7 @@
             <option value="6">Pets</option>
         </select>
 
-        <input type="hidden" th:value="${results.id}" name="id">
+        <input type="hidden" th:value="${post.id}" name="id">
         <input type="submit" value="Submit" class="btn-primary">
     </form>
 </fieldset>
@@ -58,7 +58,7 @@
         <input type="text" id="img-title" name="img-title" class="form-control">
         <label for="url" class="form-label">URL:</label>
         <input type="text" id="url" name="url" class="form-control">
-        <input type="hidden" th:value="${results.getId()}" name="id">
+        <input type="hidden" th:value="${post.getId()}" name="id">
         <input type="submit" value="Submit" class="btn-primary">
     </form>
 </fieldset>
