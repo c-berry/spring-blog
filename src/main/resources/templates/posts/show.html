@@ -30,7 +30,7 @@
 
 <fieldset>
     <legend>Edit Post</legend>
-    <form action="/posts/edit-post" method="POST">
+    <form action="/posts/edit-post" method="POST" id="formId" th:data-id="${results.id}">
         <label for="title" class="form-label">Title:</label>
         <input type="text" id="title" name="title" th:value="${results.title}" class="form-control">
         <label for="body" class="form-label">Body</label>
