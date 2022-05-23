@@ -17,6 +17,9 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
+    @OneToOne
+    private PostDetails postDetails;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -113,5 +116,13 @@ public class Post {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public PostDetails getPostDetails() {
+        return postDetails;
+    }
+
+    public void setPostDetails(PostDetails postDetails) {
+        this.postDetails = postDetails;
     }
 }

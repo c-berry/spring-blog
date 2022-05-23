@@ -18,6 +18,8 @@
             <div class="flex-container d-flex flex-wrap">
                 <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
 
+<!--                <p th:text="${post.getPostDetails()}"></p>-->
+
                 <div class="flex-container d-flex flex-row">
                     <button name="edit" th:data-id="${post.getId()}" class="btn btn-primary edit btn2">Edit</button>
                     <form action="/posts/delete-post" method="POST">
