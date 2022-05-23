@@ -10,7 +10,7 @@
 <div th:if="${posts}" class="card">
 
     <div th:each="post : ${posts}">
-        <h3 th:text="${post.title}" class="card-header ch" style="margin-left: 5px"></h3>
+        <h3 th:text="${stringService.getWordInCaps(post.title)}" class="card-header ch" style="margin-left: 5px"></h3>
 
         <div class="card-body">
             <p th:text="${post.body}"></p>
