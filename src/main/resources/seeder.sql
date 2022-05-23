@@ -19,9 +19,9 @@ USE spring_blog_db;
 #        (false, '3rd', 'We thought we knew the drill.');
 
 INSERT INTO users(email, password, username)
-VALUES ('chris@email.com', 'password', 'crispy'),
+VALUES ('christopher.m.berry01@gmail.com', 'password', 'crispy'),
        ('oscar@email.com', 'password', 'o-man'),
-       ('justin@codeup.com', 'password', 'j-bomb');
+       ('justin@email.com', 'password', 'j-bomb');
 
 INSERT INTO posts(title, body, user_id)
 VALUES ('Music Artists', 'These are some iconic music artists.', 1),

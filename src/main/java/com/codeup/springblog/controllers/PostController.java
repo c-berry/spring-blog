@@ -4,6 +4,7 @@ import com.codeup.springblog.models.*;
 import com.codeup.springblog.repositories.PostImagesRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.StringService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +21,15 @@ public class PostController {
     private final PostImagesRepository postImagesDao;
 
     private final StringService stringService;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao, StringService stringService){
+    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao, StringService stringService, EmailService emailService){
         this.postDao = postDao;
         this.userDao = userDao;
         this.postImagesDao = postImagesDao;
 
         this.stringService = stringService;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -70,11 +73,7 @@ public class PostController {
 //        return "redirect:/posts/index";
 //    }
 
-<<<<<<< HEAD
     //    form-model binding refactor =>
-=======
-//    form-model binding refactor
->>>>>>> 35bae327ecc336f302a8cacd15dcc52b6fd66236
     @GetMapping("/create")
     public String createPostForm(Model model){
 
@@ -88,6 +87,9 @@ public class PostController {
 
         User user = userDao.getById(1L);
         post.setUser(user);
+
+        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
+
         postDao.save(post);
 
         return "redirect:/posts/index";
@@ -106,11 +108,7 @@ public class PostController {
 //    }
 //
 
-<<<<<<< HEAD
     //    form-model binding refactor =>
-=======
-    //    form-model binding refactor
->>>>>>> 35bae327ecc336f302a8cacd15dcc52b6fd66236
     @GetMapping("/posts/{id}")
     public String updatePost(@PathVariable long id, Model model) {
 
@@ -122,11 +120,6 @@ public class PostController {
     @PostMapping("/edit-post")
     public String UpdatePost(@ModelAttribute Post post, @ModelAttribute PostImages images) {
 
-<<<<<<< HEAD
-=======
-//        User user = userDao.getById(1L);
-//        post.setUser(user);
->>>>>>> 35bae327ecc336f302a8cacd15dcc52b6fd66236
         postDao.save(post);
 
         return "redirect:/posts/index";
