@@ -21,7 +21,7 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "post")
     private List<PostImages> postImages;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -106,10 +106,10 @@ public class PostController {
     }
 
     @PostMapping("/edit-post")
-    public String doUpdatePost(@ModelAttribute Post post) {
+    public String UpdatePost(@ModelAttribute Post post, @ModelAttribute PostImages images) {
 
-        User user = userDao.getById(1L);
-        post.setUser(user);
+//        User user = userDao.getById(1L);
+//        post.setUser(user);
         postDao.save(post);
 
         return "redirect:/posts/index";

@@ -70,7 +70,15 @@
             <option value="6">Pets</option>
         </select>
         <br>
+        Image Title:
+
+<!--        <div th:each="image : *{postImages}">-->
+<!--            <input type="text" th:field="*{postImages[__${imageStat.index}__].title}">-->
+<!--        </div>-->
+
+        <br>
         <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{user.id}">
         <input type="submit">
     </form>
 </fieldset>
