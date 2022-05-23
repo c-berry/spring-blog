@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS spring_blog_db;
 
 USE spring_blog_db;
 
+
 # INSERT INTO  pet_details(description, is_sterile, weight_in_ounces)
 # VALUES ('fun', false, 20),
 #        ('lame', true, 30),
@@ -26,7 +27,8 @@ INSERT INTO posts(title, body, user_id)
 VALUES ('Music Artists', 'These are some iconic music artists.', 1),
        ('Cars', 'These are highly desired cars from various years.', 2),
        ('Video Games', 'These are main characters from blockbuster video games.', 3),
-       ('Animals', 'Behold my cuddly critters!', 1);
+       ('Animals', 'Behold my cuddly critters!', 1),
+       ('Code', 'Code is the foundation of all programming.', 2);
 
 INSERT INTO post_images(title, url, post_id)
 VALUES ('Cat', 'https://media.wired.co.uk/photos/60c8730fa81eb7f50b44037e/3:2/w_3329,h_2219,c_limit/1521-WIRED-Cat.jpeg', 4),
@@ -40,7 +42,10 @@ VALUES ('Cat', 'https://media.wired.co.uk/photos/60c8730fa81eb7f50b44037e/3:2/w_
        ('Supra', 'https://cdn1.mecum.com/auctions/an1115/an1115-226294/images/an1115-226294_3@2x.jpg?1447437826000', 2),
        ('Jimi Hendrix', 'https://api.time.com/wp-content/uploads/2017/04/jimi-hendrix-08.jpg', 1),
        ('Jim Morrison', 'https://bonjourparis.com/wp-content/uploads/2020/07/31591828846_b36df16120_b-e1551797088469-670x679-1.jpg', 1),
-       ('Tyler the Creator', 'https://www.nme.com/wp-content/uploads/2022/03/Tyler-The-Creator.jpg', 1);
+       ('Tyler the Creator', 'https://www.nme.com/wp-content/uploads/2022/03/Tyler-The-Creator.jpg', 1),
+       ('Code 1', 'https://www.economist.com/sites/default/files/images/2015/09/blogs/economist-explains/code2.png', 5),
+       ('Code 2', 'https://media.edutopia.org/styles/responsive_2880px_16x9/s3/masters/d7_images/slates/rushkoff-codecademy-literacy.jpg', 5),
+       ('Code 3', 'https://f.hubspotusercontent10.net/hubfs/8060716/code.jpg', 5);
 
 INSERT INTO tags(name)
 VALUES ('Tech'),
@@ -58,4 +63,7 @@ VALUES (1, 5),
        (3, 1),
        (3, 2),
        (4, 6),
-       (4, 4);
+       (4, 4),
+       (5, 2),
+       (5, 3),
+       (5, 4);

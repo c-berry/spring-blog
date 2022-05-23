@@ -7,6 +7,7 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostImagesRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.StringService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +24,14 @@ public class PostController {
     private final UserRepository userDao;
     private final PostImagesRepository postImagesDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao){
+    private final StringService stringService;
+
+    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao, StringService stringService){
         this.postDao = postDao;
         this.userDao = userDao;
         this.postImagesDao = postImagesDao;
+
+        this.stringService = stringService;
     }
 
     @GetMapping
@@ -50,6 +55,7 @@ public class PostController {
 
         model.addAttribute("posts", post);
         model.addAttribute("images", postImages);
+        model.addAttribute("stringService", stringService);
 
         return "posts/index";
     }
