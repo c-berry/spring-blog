@@ -42,9 +42,8 @@
         <td><a th:href="@{/movie/{id}(id=${movie.id})}">[[${movie.title}]]</a></td>
         <td>
             <form th:method="post"
-                  th:action="@{/movies/delete}"
-            > <button type="submit" name="id" th:value="${movie.id}">X</button> </form> </td>
-
+                  th:action="@{/movies/delete}">
+                <button type="submit" name="id" th:value="${movie.id}">X</button> </form> </td>
     </tr>
     </tbody>
 </table>

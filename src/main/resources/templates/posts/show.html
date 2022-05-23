@@ -28,28 +28,61 @@
     </div>
 </div>
 
-<fieldset>
-    <legend>Edit Post</legend>
-    <form action="/posts/edit-post" method="POST" id="formId" th:data-id="${post.id}">
-        <label for="title" class="form-label">Title:</label>
-        <input type="text" id="title" name="title" th:value="${post.title}" class="form-control">
-        <label for="body" class="form-label">Body</label>
-        <input type="text" id="body" name="body" th:value="${post.body}" class="form-control">
+<!--<fieldset>-->
+<!--    <legend>Edit Post</legend>-->
+<!--    <form action="/posts/edit-post" method="POST" id="formId" th:data-id="${post.id}">-->
+<!--        <label for="title" class="form-label">Title:</label>-->
+<!--        <input type="text" id="title" name="title" th:value="${post.title}" class="form-control">-->
+<!--        <label for="body" class="form-label">Body</label>-->
+<!--        <input type="text" id="body" name="body" th:value="${post.body}" class="form-control">-->
 
-        <label for="tag" class="form-label">Change Tag(s):</label>
-        <select name="tag" id="tag" class="form-control" multiple>
+<!--        <label for="tag" class="form-label">Change Tag(s):</label>-->
+<!--        <select name="tag" id="tag" class="form-control" multiple>-->
+<!--            <option value="1">Tech</option>-->
+<!--            <option value="2">Games</option>-->
+<!--            <option value="3">Lifestyle</option>-->
+<!--            <option value="4" selected="selected">Etc.</option>-->
+<!--            <option value="5">Music</option>-->
+<!--            <option value="6">Pets</option>-->
+<!--        </select>-->
+
+<!--        <input type="hidden" th:value="${post.id}" name="id">-->
+<!--        <input type="submit" value="Submit" class="btn-primary">-->
+<!--    </form>-->
+<!--</fieldset>-->
+
+<!--form model binding refactor-->
+<fieldset>
+    <form th:action="@{/posts/edit-post}" th:method="POST" th:object="${post}">
+        Title:
+        <input th:field="*{title}">
+        <br>
+        Description:
+        <input th:field="*{body}">
+        <br>
+        Tags:
+        <select th:field="*{tags}" multiple>
             <option value="1">Tech</option>
             <option value="2">Games</option>
             <option value="3">Lifestyle</option>
-            <option value="4" selected="selected">Etc.</option>
+            <option value="4">Etc.</option>
             <option value="5">Music</option>
             <option value="6">Pets</option>
         </select>
+        <br>
+        Image Title:
 
-        <input type="hidden" th:value="${post.id}" name="id">
-        <input type="submit" value="Submit" class="btn-primary">
+<!--        <div th:each="image : *{postImages}">-->
+<!--            <input type="text" th:field="*{postImages[__${imageStat.index}__].title}">-->
+<!--        </div>-->
+
+        <br>
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{user.id}">
+        <input type="submit">
     </form>
 </fieldset>
+<!--form model binding refactor-->
 
 <fieldset>
     <legend>Add Image to Post</legend>
