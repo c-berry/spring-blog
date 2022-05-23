@@ -70,7 +70,11 @@ public class PostController {
 //        return "redirect:/posts/index";
 //    }
 
+<<<<<<< HEAD
     //    form-model binding refactor =>
+=======
+//    form-model binding refactor
+>>>>>>> 35bae327ecc336f302a8cacd15dcc52b6fd66236
     @GetMapping("/create")
     public String createPostForm(Model model){
 
@@ -102,7 +106,11 @@ public class PostController {
 //    }
 //
 
+<<<<<<< HEAD
     //    form-model binding refactor =>
+=======
+    //    form-model binding refactor
+>>>>>>> 35bae327ecc336f302a8cacd15dcc52b6fd66236
     @GetMapping("/posts/{id}")
     public String updatePost(@PathVariable long id, Model model) {
 
@@ -114,6 +122,11 @@ public class PostController {
     @PostMapping("/edit-post")
     public String UpdatePost(@ModelAttribute Post post, @ModelAttribute PostImages images) {
 
+<<<<<<< HEAD
+=======
+//        User user = userDao.getById(1L);
+//        post.setUser(user);
+>>>>>>> 35bae327ecc336f302a8cacd15dcc52b6fd66236
         postDao.save(post);
 
         return "redirect:/posts/index";

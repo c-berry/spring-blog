@@ -1,3 +1,91 @@
+package com.codeup.springblog.controllers;
+
+import com.codeup.springblog.models.Movie;
+import com.codeup.springblog.repositories.MovieRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+
+@Controller
+@RequestMapping("/movies")
+public class MovieController {
+
+
+    private MovieRepository movieDao;
+
+
+    public MovieController(MovieRepository movieDao) {
+        this.movieDao = movieDao;
+    }
+
+    // Read
+    @GetMapping
+    public String showMovies(Model model) {
+
+        model.addAttribute("movies",movieDao.findAll());
+        return "movies/index";
+    }
+
+    // Create
+    @GetMapping("/create")
+    public String createMovie(Model model) {
+
+        model.addAttribute("movie", new Movie());
+        return "movies/create";
+    }
+
+
+    @PostMapping("/create")
+    public String doCreateMovie(
+            @ModelAttribute Movie movie
+    ) {
+
+        movieDao.save(movie);
+        return "movies/index";
+    }
+
+
+    // Update
+    @GetMapping("/update/{id}")
+    public String updateMovie(
+            @PathVariable long id,
+            Model model) {
+
+        model.addAttribute("movie", movieDao.getById(id));
+
+        // it will allow you to update an existing movie.
+        return "movies/create";
+    }
+
+    @PostMapping("/update")
+    public String doUpdateMovie(
+            @ModelAttribute Movie movie
+    ) {
+
+        movieDao.save(movie);
+
+        return "redirect:/movies";
+    }
+
+
+    // Delete
+    @PostMapping("/delete")
+    public String deleteMovie(
+            @RequestParam(name="id") long id
+    ) {
+
+        movieDao.deleteById(id);
+
+        return "redirect:/movies";
+    }
+
+
+
+
+}
 //package com.codeup.springblog.controllers;
 //
 //import com.codeup.springblog.models.Movie;
