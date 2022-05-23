@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head th:replace="partials/partials.html :: head ('View All Posts')">
 <body>
 <nav th:replace="partials/partials.html :: navbar"></nav>
 
 <h1 th:if="${posts}">All the Posts</h1>
 <h1 th:if="!${posts}">Landing Page</h1>
+
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+    Email: <span th:text="${#authentication.principal.email}"/>
+</div>
 
 <div th:if="${posts}" class="card">
 
@@ -15,10 +23,10 @@
         <div class="card-body">
             <p th:text="${post.body}"></p>
 
+            <p th:text="${post.getPostDetails().getHistoryOfPost()}"></p>
+
             <div class="flex-container d-flex flex-wrap">
                 <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
-
-<!--                <p th:text="${post.getPostDetails()}"></p>-->
 
                 <div class="flex-container d-flex flex-row">
                     <button name="edit" th:data-id="${post.getId()}" class="btn btn-primary edit btn2">Edit</button>

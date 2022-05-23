@@ -15,7 +15,8 @@ public class PostImages {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String url;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne
+//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "post_id")
     private Post post;
 

@@ -9,11 +9,16 @@ public class PostDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private boolean isAwesome;
 
     @Column(columnDefinition = "TEXT")
     private String historyOfPost;
+
     private String topicDescription;
+
+//    @OneToOne(mappedBy = "postDetails")
+//    private Post post;
 
     public PostDetails(){}
 

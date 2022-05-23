@@ -1,6 +1,7 @@
 package com.codeup.springblog.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,25 +18,40 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PostDetails postDetails;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostImages> postImages = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "post_tag",
+            joinColumns = {@JoinColumn(name="post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
+    )
+    private List<Tag> tags = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "post")
-    private List<PostImages> postImages;
-
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(
-            name="post_tag",
-            joinColumns={@JoinColumn(name="post_id")},
-            inverseJoinColumns={@JoinColumn(name="tag_id")}
-    )
-    private List<Tag> tags;
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "post")
+//    private List<PostImages> postImages;
+//
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(
+//            name="post_tag",
+//            joinColumns={@JoinColumn(name="post_id")},
+//            inverseJoinColumns={@JoinColumn(name="tag_id")}
+//    )
+//    private List<Tag> tags;
 
     public Post(){}
+
+    public Post(PostDetails postDetails) {
+        this.postDetails = postDetails;
+    }
+
 
     public Post(String title, String body, User user, List<PostImages> postImages) {
         this.title = title;
@@ -70,6 +86,14 @@ public class Post {
     public Post(List<Tag> tags, String title, String body, User user) {
         this.title = title;
         this.body = body;
+        this.user = user;
+        this.tags = tags;
+    }
+
+    public Post(String title, String body, PostDetails postDetails, User user, List<Tag> tags) {
+        this.title = title;
+        this.body = body;
+        this.postDetails = postDetails;
         this.user = user;
         this.tags = tags;
     }
@@ -125,4 +149,18 @@ public class Post {
     public void setPostDetails(PostDetails postDetails) {
         this.postDetails = postDetails;
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", postDetails=" + postDetails +
+                ", user=" + user +
+                ", postImages=" + postImages +
+                ", tags=" + tags +
+                '}';
+    }
+
 }

@@ -13,22 +13,24 @@ USE spring_blog_db;
 #        (5, 'Bucko', 'labrador', 2),
 #        (10, 'Lucky', 'Dalmatian', 3);
 
-# INSERT INTO post_details(is_awesome, history_of_post, topic_description)
-# VALUES (true, '1st', 'Simply a test..'),
-#        (true, '2nd', 'Another one.'),
-#        (false, '3rd', 'We thought we knew the drill.');
+INSERT INTO post_details(history_of_post, is_awesome, topic_description)
+VALUES ('Random history.', true, 'This is a description.'),
+       ('This is historical.', false, 'This is an accurate description.'),
+       ('The past is over with.', true, 'You can ignore this.'),
+       ('Yesterday was meh.', false, 'Tomorrow is wow.'),
+       ('In the beginning there was only darkness.', true, 'In the end there was a bright light.');
 
 INSERT INTO users(email, password, username)
-VALUES ('christopher.m.berry01@gmail.com', 'password', 'crispy'),
-       ('oscar@email.com', 'password', 'o-man'),
-       ('justin@email.com', 'password', 'j-bomb');
+VALUES ('christopher.m.berry01@gmail.com', '$2a$10$koeUheO/M9xMIUK10HWVXOqov1a2zSEoMX6VWOY1ajE6YOAtkI7.C', 'crispy'),
+       ('oscar@email.com', '$2a$10$ZL14ZaRSjrvtyJ0mJ/GLy.4sDmwW/wgrqktw8KY2PaBBJDh2TwhU.', 'o-man'),
+       ('justin@email.com', '$2a$10$i9IelT4p4WOpA.yuOD8HDuhQDWcJPtr46h5Y1yehSjtP3MOSPae1W', 'j-bomb');
 
-INSERT INTO posts(title, body, user_id)
-VALUES ('Music Artists', 'These are some iconic music artists.', 1),
-       ('Cars', 'These are highly desired cars from various years.', 2),
-       ('Video Games', 'These are main characters from blockbuster video games.', 3),
-       ('Animals', 'Behold my cuddly critters!', 1),
-       ('Code', 'Code is the foundation of all programming.', 2);
+INSERT INTO posts(title, body, user_id, post_details_id)
+VALUES ('Music Artists', 'These are some iconic music artists.', 1, 1),
+       ('Cars', 'These are highly desired cars from various years.', 2, 2),
+       ('Video Games', 'These are main characters from blockbuster video games.', 3, 3),
+       ('Animals', 'Behold my cuddly critters!', 1, 4),
+       ('Code', 'Code is the foundation of all programming.', 2, 5);
 
 INSERT INTO post_images(title, url, post_id)
 VALUES ('Cat', 'https://media.wired.co.uk/photos/60c8730fa81eb7f50b44037e/3:2/w_3329,h_2219,c_limit/1521-WIRED-Cat.jpeg', 4),

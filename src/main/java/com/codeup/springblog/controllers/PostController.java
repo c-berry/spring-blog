@@ -1,11 +1,14 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.*;
+import com.codeup.springblog.repositories.PostDetailsRepository;
 import com.codeup.springblog.repositories.PostImagesRepository;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.StringService;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +22,16 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
     private final PostImagesRepository postImagesDao;
+    private final PostDetailsRepository postDetailsDao;
 
     private final StringService stringService;
     private final EmailService emailService;
 
-    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao, StringService stringService, EmailService emailService){
+    public PostController(PostRepository postDao, UserRepository userDao, PostImagesRepository postImagesDao, PostDetailsRepository postDetailsDao,  StringService stringService, EmailService emailService){
         this.postDao = postDao;
         this.userDao = userDao;
         this.postImagesDao = postImagesDao;
+        this.postDetailsDao = postDetailsDao;
 
         this.stringService = stringService;
         this.emailService = emailService;
@@ -85,10 +90,21 @@ public class PostController {
     @PostMapping("/create")
     public String addPost(@ModelAttribute Post post){
 
+        System.out.println(post.getPostDetails().toString());
+
         User user = userDao.getById(1L);
         post.setUser(user);
 
-        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
+//        PostDetails pd = postDetailsDao.getById(post.getPostDetails().getId());
+//        post.setPostDetails(pd);
+
+//        post.setPostDetails(post.getPostDetails());
+//        postDetailsDao.save(post.setPostDetails());
+
+//        User user = (User) SecurityContextHolder.getContext(). getAuthentication().getPrincipal();
+//        post.setUser(user);
+
+//        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
 
         postDao.save(post);
 
@@ -119,6 +135,12 @@ public class PostController {
 
     @PostMapping("/edit-post")
     public String UpdatePost(@ModelAttribute Post post, @ModelAttribute PostImages images) {
+
+//        Post existingPost = postDao.getById(post.getId());
+//        existingPost.setTitle(post.getTitle());
+
+//        User user = (User) SecurityContextHolder.getContext(). getAuthentication().getPrincipal();
+//        post.setUser(user);
 
         postDao.save(post);
 

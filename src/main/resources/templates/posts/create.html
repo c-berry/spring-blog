@@ -35,7 +35,20 @@
         Description:
         <input th:field="*{body}">
         <br>
+        History of Post:
+        <input th:field="*{postDetails.historyOfPost}">
+        <br>
+        Is Awesome:
+        <select th:field="*{postDetails.awesome}">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        <br>
+        Post Description:
+        <input th:field="*{postDetails.topicDescription}">
+        <br>
         Tags:
+        <br>
         <select th:field="*{tags}" multiple>
             <option value="1">Tech</option>
             <option value="2">Games</option>
@@ -45,6 +58,7 @@
             <option value="6">Pets</option>
         </select>
         <br>
+<!--        <input type="hidden" th:field="*{postDetails.id}">-->
         <input type="submit">
     </form>
 </fieldset>
