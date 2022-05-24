@@ -10,6 +10,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Post getById(long id);
 
+    Post findFirstByTitle(String xxTestTitlexx);
+
 //    List<Post> findByTitle(String title);
 
 //    @Query("FROM Post p WHERE p.title LIKE %?1%")

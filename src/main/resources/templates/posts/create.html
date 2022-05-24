@@ -35,10 +35,11 @@
 <!--    </form>-->
 <!--</fieldset>-->
 
-<fieldset>
+<div class="d-flex justify-content-center">
+<fieldset class="card text-center justify-content-center d-flex" style="width: 30em">
     <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
         <label for="title" class="form-label">Title:</label>
-        <input th:field="*{title}" class="form-control" id="title">
+        <input th:field="*{title}" class="form-control justify-content-center" id="title" style="width: 80%">
         <br>
         <label for="body" class="form-label">Description:</label>
         <input th:field="*{body}" class="form-control" id="body">
@@ -70,6 +71,7 @@
         <input type="submit" class="btn-primary">
     </form>
 </fieldset>
+</div>
 
 <footer th:replace="partials/partials.html :: footer"></footer>
 </body>
