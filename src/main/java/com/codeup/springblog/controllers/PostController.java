@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -82,30 +83,23 @@ public class PostController {
     @GetMapping("/create")
     public String createPostForm(Model model){
 
+        LocalDate today = LocalDate.now();
+
+        model.addAttribute("currentDate", today);
         model.addAttribute("post", new Post());
 
         return "posts/create";
     }
 
     @PostMapping("/create")
-    public String addPost(@ModelAttribute Post post){
+    public String addPost(@ModelAttribute Post post, @RequestParam(name = "date") String postHistory){
 
-        System.out.println(post.getPostDetails().toString());
-
-        User user = userDao.getById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
-
-//        PostDetails pd = postDetailsDao.getById(post.getPostDetails().getId());
-//        post.setPostDetails(pd);
-
-//        post.setPostDetails(post.getPostDetails());
-//        postDetailsDao.save(post.setPostDetails());
-
-//        User user = (User) SecurityContextHolder.getContext(). getAuthentication().getPrincipal();
-//        post.setUser(user);
 
 //        emailService.prepareAndSend(post, post.getTitle(), post.getBody());
 
+        post.getPostDetails().setHistoryOfPost(postHistory);
         postDao.save(post);
 
         return "redirect:/posts/index";
@@ -122,7 +116,6 @@ public class PostController {
 //
 //        return "redirect:/posts/" + id;
 //    }
-//
 
     //    form-model binding refactor =>
     @GetMapping("/posts/{id}")
@@ -138,9 +131,6 @@ public class PostController {
 
 //        Post existingPost = postDao.getById(post.getId());
 //        existingPost.setTitle(post.getTitle());
-
-//        User user = (User) SecurityContextHolder.getContext(). getAuthentication().getPrincipal();
-//        post.setUser(user);
 
         postDao.save(post);
 

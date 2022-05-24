@@ -8,12 +8,22 @@
 <h1 th:if="!${posts}">Landing Page</h1>
 
 <div sec:authorize="isAuthenticated()">
-    This content is only shown to authenticated users.
+<!--    This content is only shown to authenticated users.-->
 
     User ID: <span th:text="${#authentication.principal.id}"/>
     Username: <span th:text="${#authentication.principal.username}"/>
-    Email: <span th:text="${#authentication.principal.email}"/>
+<!--    Email: <span th:text="${#authentication.principal.email}"/>-->
 </div>
+
+<div th:if="!${posts}">
+    <img style="text-align: center" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Best-Creations-From-Dexters-Laboratory.jpg" alt="dexter">
+    <img style="text-align: center" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Best-Creations-From-Dexters-Laboratory.jpg" alt="dexter">
+    <img style="text-align: center" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Best-Creations-From-Dexters-Laboratory.jpg" alt="dexter">
+    <img th:if:!${posts} style="text-align: center" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Best-Creations-From-Dexters-Laboratory.jpg" alt="dexter">
+    <img th:if:!${posts} style="text-align: center" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Best-Creations-From-Dexters-Laboratory.jpg" alt="dexter">
+    <img th:if:!${posts} style="text-align: center" src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/04/Best-Creations-From-Dexters-Laboratory.jpg" alt="dexter">
+</div>
+
 
 <div th:if="${posts}" class="card">
 
@@ -21,9 +31,11 @@
         <h3 th:text="${stringService.getWordInCaps(post.title)}" class="card-header ch" style="margin-left: 5px"></h3>
 
         <div class="card-body">
-            <p th:text="${post.body}"></p>
 
-            <p th:text="${post.getPostDetails().getHistoryOfPost()}"></p>
+            <div class="flex-container d-flex flex-row">
+                <p th:text="${post.body}"></p>
+                <p th:text="${post.getPostDetails().getHistoryOfPost()}" class="ms-auto" style="color: #adadad"></p>
+            </div>
 
             <div class="flex-container d-flex flex-wrap">
                 <p th:text="'Created by: ' + ${post.getUser().getUsername()} + ' (' + ${post.getUser().getEmail()} + ')'"></p>
@@ -44,8 +56,9 @@
             </div>
 
             <div class="flex-container d-flex flex-wrap">
-                <div th:each="image : ${post.postImages}" >
+                <div th:each="image : ${post.postImages}">
                     <img th:src="${image.getUrl()}">
+                    <p th:text="${image.title}" style="margin-left: 6px"></p>
                 </div>
             </div>
         </div>

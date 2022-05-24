@@ -23,10 +23,11 @@ public class Post {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private List<PostImages> postImages = new ArrayList<>();
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "post_tag",
-            joinColumns = {@JoinColumn(name="post_id")},
+            joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")}
     )
     private List<Tag> tags = new ArrayList<>();
@@ -37,14 +38,6 @@ public class Post {
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "post")
 //    private List<PostImages> postImages;
-//
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(
-//            name="post_tag",
-//            joinColumns={@JoinColumn(name="post_id")},
-//            inverseJoinColumns={@JoinColumn(name="tag_id")}
-//    )
-//    private List<Tag> tags;
 
     public Post(){}
 

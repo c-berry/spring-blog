@@ -35,6 +35,10 @@ img {
     margin-left: 6px;
 }
 
+.img {
+    text-align: center;
+}
+
 .btn {
     display: flex;
     align-items: center;
@@ -50,4 +54,8 @@ img {
     justify-content: center;
     height: 30px!important;
     width: 60px!important;
+}
+
+.form {
+    /*margin-left: 5em;*/
 }

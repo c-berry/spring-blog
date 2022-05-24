@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head th:replace="partials/partials.html :: head ('Create Posts')">
 </head>
 <body>
 <nav th:replace="partials/partials.html :: navbar"></nav>
+
+<div sec:authorize="isAuthenticated()">
+    <!--    This content is only shown to authenticated users.-->
+
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+<!--    Email: <span th:text="${#authentication.principal.email}"/>-->
+</div>
 
 <h1>Add a Post</h1>
 
@@ -29,27 +37,27 @@
 
 <fieldset>
     <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
-        Title:
-        <input th:field="*{title}">
+        <label for="title" class="form-label">Title:</label>
+        <input th:field="*{title}" class="form-control" id="title">
         <br>
-        Description:
-        <input th:field="*{body}">
+        <label for="body" class="form-label">Description:</label>
+        <input th:field="*{body}" class="form-control" id="body">
         <br>
-        History of Post:
-        <input th:field="*{postDetails.historyOfPost}">
+<!--        <input th:field="*{postDetails.historyOfPost}">-->
+        <input name="date" type="hidden" th:value="${currentDate}" class="form-control">
         <br>
-        Is Awesome:
-        <select th:field="*{postDetails.awesome}">
+        <label for="awesome" class="form-label">Is Awesome:</label>
+        <select th:field="*{postDetails.awesome}" class="form-control" id="awesome">
             <option value="true">True</option>
             <option value="false">False</option>
         </select>
         <br>
-        Post Description:
-        <input th:field="*{postDetails.topicDescription}">
+        <label for="desc" class="form-label">Post Description:</label>
+        <input th:field="*{postDetails.topicDescription}" class="form-control" id="desc">
         <br>
-        Tags:
+        <label for="tags" class="form-label">Tags:</label>
         <br>
-        <select th:field="*{tags}" multiple>
+        <select th:field="*{tags}"  class="form-control" id="tags" multiple>
             <option value="1">Tech</option>
             <option value="2">Games</option>
             <option value="3">Lifestyle</option>
@@ -59,7 +67,7 @@
         </select>
         <br>
 <!--        <input type="hidden" th:field="*{postDetails.id}">-->
-        <input type="submit">
+        <input type="submit" class="btn-primary">
     </form>
 </fieldset>
 

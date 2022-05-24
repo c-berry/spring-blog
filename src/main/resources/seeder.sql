@@ -2,23 +2,12 @@ CREATE DATABASE IF NOT EXISTS spring_blog_db;
 
 USE spring_blog_db;
 
-
-# INSERT INTO  pet_details(description, is_sterile, weight_in_ounces)
-# VALUES ('fun', false, 20),
-#        ('lame', true, 30),
-#        ('wow', true, 10);
-#
-# INSERT INTO pets(age, name, type, pet_details_id)
-# VALUES (2, 'Spot', 'mutt', 1),
-#        (5, 'Bucko', 'labrador', 2),
-#        (10, 'Lucky', 'Dalmatian', 3);
-
 INSERT INTO post_details(history_of_post, is_awesome, topic_description)
-VALUES ('Random history.', true, 'This is a description.'),
-       ('This is historical.', false, 'This is an accurate description.'),
-       ('The past is over with.', true, 'You can ignore this.'),
-       ('Yesterday was meh.', false, 'Tomorrow is wow.'),
-       ('In the beginning there was only darkness.', true, 'In the end there was a bright light.');
+VALUES ('2020-10-23', true, 'Music related info.'),
+       ('2021-01-01', false, 'Vehicles of various makes and models.'),
+       ('2021-02-25', true, 'Anything video game related.'),
+       ('2022-04-04', false, 'Assortment of various animal species.'),
+       ('2022-05-05', true, 'A programmer''s favorite subject.');
 
 INSERT INTO users(email, password, username)
 VALUES ('christopher.m.berry01@gmail.com', '$2a$10$koeUheO/M9xMIUK10HWVXOqov1a2zSEoMX6VWOY1ajE6YOAtkI7.C', 'crispy'),
@@ -69,3 +58,13 @@ VALUES (1, 5),
        (5, 2),
        (5, 3),
        (5, 4);
+
+# INSERT INTO  pet_details(description, is_sterile, weight_in_ounces)
+# VALUES ('fun', false, 20),
+#        ('lame', true, 30),
+#        ('wow', true, 10);
+#
+# INSERT INTO pets(age, name, type, pet_details_id)
+# VALUES (2, 'Spot', 'mutt', 1),
+#        (5, 'Bucko', 'labrador', 2),
+#        (10, 'Lucky', 'Dalmatian', 3);

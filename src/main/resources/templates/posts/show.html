@@ -1,15 +1,27 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head th:replace="partials/partials.html :: head ('View One Posts')">
 </head>
 <nav th:replace="partials/partials.html :: navbar"></nav>
 
+<div sec:authorize="isAuthenticated()">
+    <!--    This content is only shown to authenticated users.-->
+
+    User ID: <span th:text="${#authentication.principal.id}"/>
+    Username: <span th:text="${#authentication.principal.username}"/>
+<!--    Email: <span th:text="${#authentication.principal.email}"/>-->
+</div>
+
 <h1>View a Post</h1>
 
 <div th:if="${post}" class="card">
+    <h3 th:text="${post.title}" class="card-header ch"></h3>
+
     <div class="card-body">
-        <p th:text="${post.title}"></p>
-        <p th:text="${post.body}"></p>
+        <div class="flex-container d-flex flex-row">
+            <p th:text="${post.body}"></p>
+            <p th:text="${post.getPostDetails().getHistoryOfPost()}" class="ms-auto" style="color: #adadad"></p>
+        </div>
         <p th:text="${post.getUser().getEmail()}"></p>
         <div>
             <div th:each="tag : ${post.getTags()}">
@@ -19,6 +31,7 @@
         <div class="flex-container d-flex flex-wrap">
             <div th:each="image : ${post.postImages}" >
                 <img th:src="${image.getUrl()}" class="">
+                <p th:text="${image.title}"></p>
                 <form action="/posts/delete-img" method="POST">
                     <input type="hidden" th:value="${image.getId()}" name="id">
                     <button type="submit" class="btn btn-danger btn1">Delete</button>
@@ -55,13 +68,25 @@
 <fieldset>
     <form th:action="@{/posts/edit-post}" th:method="POST" th:object="${post}">
         Title:
-        <input th:field="*{title}">
+        <input th:field="*{title}" class="form-control">
         <br>
         Description:
-        <input th:field="*{body}">
+        <input th:field="*{body}" class="form-control">
+        <br>
+        History of Post:
+        <input type="hidden" th:field="*{postDetails.historyOfPost}" class="form-control">
+        <br>
+        Is Awesome:
+        <select th:field="*{postDetails.awesome}" class="form-control">
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+        <br>
+        Post Description:
+        <input th:field="*{postDetails.topicDescription}" class="form-control">
         <br>
         Tags:
-        <select th:field="*{tags}" multiple>
+        <select th:field="*{tags}" class="form-control" multiple>
             <option value="1">Tech</option>
             <option value="2">Games</option>
             <option value="3">Lifestyle</option>
@@ -69,18 +94,19 @@
             <option value="5">Music</option>
             <option value="6">Pets</option>
         </select>
-        <br>
 <!--        <div th:each="image : *{postImages}">-->
 <!--            <input type="text" th:field="*{postImages[__${imageStat.index}__].title}">-->
 <!--        </div>-->
-        <br>
         <input type="hidden" th:field="*{id}">
         <input type="hidden" th:field="*{user.id}">
         <input type="hidden" th:field="*{postDetails.id}">
-        <input type="submit">
+        <input type="submit" class="btn-primary">
     </form>
 </fieldset>
 <!--form model binding refactor-->
+
+<br>
+<br>
 
 <fieldset>
     <legend>Add Image to Post</legend>
