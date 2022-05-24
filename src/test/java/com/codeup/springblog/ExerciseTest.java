@@ -1,6 +1,7 @@
 package com.codeup.springblog;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.PostDetails;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
@@ -16,6 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.Locale;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.not;
@@ -100,16 +103,20 @@ public class ExerciseTest {
     // test post creation
     @Test
     public void testPostCreation() throws Exception {
+
+        PostDetails postDetails = new PostDetails(true, "historyOfPost", "topicDescription");
+        Post newPost = new Post("xxTestTitlexx", "body text", postDetails, testUser);
         mvc.perform(
                         post("/posts/create")
                                 .with(csrf())
                                 .session((MockHttpSession) session)
-                                .flashAttr("post", new Post("xxTestTitlexx", "body text"))
+                                .flashAttr("post", newPost)
+                                        .param("date", "2022-10-10")
                 ).andExpect(status().is3xxRedirection())
                 .andDo(print());
 
         Post p = postDao.findFirstByTitle("xxTestTitlexx");
-        postDao.deleteById(p.getId());
+//        postDao.deleteById(p.getId());
 
     }
 
@@ -138,19 +145,25 @@ public class ExerciseTest {
     // test post index
     public void testPostIndex() throws Exception {
         Post post = postDao.findAll().get(0);
+        System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWW " + post.getPostDetails().getHistoryOfPost());
+//        System.out.println(post.getPostDetails());
 
-        mvc.perform(
-                        get("/posts")
+        this.mvc.perform(
+                        get("/posts/index")
                 ).andExpect(status().isOk())
                 .andExpect(content().string(
                         containsString(
-                                post.getTitle()
+                                post.getTitle().toUpperCase()
                         )))
                 .andExpect(content().string(
                         containsString(
                                 post.getBody()
-                        )
-                ));
+                        )))
+                .andExpect(
+                        content().string(containsString(post.getPostDetails().getHistoryOfPost())))
+//                .andExpect(
+//                        content().string(containsString(post.getUser().getUsername())))
+        ;
     }
 
 
@@ -158,8 +171,9 @@ public class ExerciseTest {
     @Test
     public void testPostEdit() throws Exception {
 
+        PostDetails postDetails = new PostDetails(true, "historyOfPost", "topicDescription");
         // need an existing item to edit
-        Post post = new Post("New Post", "I am the body", testUser);
+        Post post = new Post("New Post", "I am the body", postDetails, testUser);
 
         post = postDao.save(post);
 
@@ -168,7 +182,7 @@ public class ExerciseTest {
         post.setTitle("Updated Title!");
         post.setBody("Updated Body!!!");
 
-        mvc.perform(post("/posts/edit")
+        mvc.perform(post("/posts/edit-post")
                 .with(csrf())
                 .session((MockHttpSession) session)
                 .flashAttr("post", post)
@@ -198,20 +212,23 @@ public class ExerciseTest {
     @Test
     public void testPostDelete() throws Exception {
 
+        PostDetails postDetails = new PostDetails(true, "historyOfPost", "topicDescription");
+
 
         // make a post to delete
         // need an existing item to delete
-        Post post = new Post("New Post", "I am the body", testUser);
+        Post post = new Post("New Post", "I am the body", postDetails, testUser);
         post = postDao.save(post);
 
         Long id = post.getId();
 
 
-        // post delete:f test that the post doesent exist
+        // post delete:f test that the post doesn't exist
         mvc.perform(
-                post("/posts/" + post.getId() + "/delete")
+                post("/posts/delete-post")
                         .with(csrf())
-                        .session((MockHttpSession) session)
+                        .session((MockHttpSession) session).param("id", id.toString())
+                        .param("id", id.toString())
         ).andExpect(status().is3xxRedirection());
 
 //         System.out.println("dbPost = " + dbPost);

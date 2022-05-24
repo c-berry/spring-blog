@@ -91,6 +91,13 @@ public class Post {
         this.tags = tags;
     }
 
+    public Post(String title, String body, PostDetails postDetails, User user) {
+        this.title = title;
+        this.body = body;
+        this.postDetails = postDetails;
+        this.user = user;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -143,17 +150,17 @@ public class Post {
         this.postDetails = postDetails;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                ", postDetails=" + postDetails +
-                ", user=" + user +
-                ", postImages=" + postImages +
-                ", tags=" + tags +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Post{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", body='" + body + '\'' +
+//                ", postDetails=" + postDetails +
+//                ", user=" + user +
+//                ", postImages=" + postImages +
+//                ", tags=" + tags +
+//                '}';
+//    }
 
 }
